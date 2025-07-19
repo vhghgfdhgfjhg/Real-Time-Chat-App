@@ -1,9 +1,9 @@
 import express from "express";
-import authRoutes from "./src/routes/auth.route.js";
+import authRoutes from "./routes/auth.route.js";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
 import cookieParser from "cookie-parser";
-import messageroute from "./src/routes/message.route.js";
+import messageroute from "./routes/message.route.js";
 import cors from "cors";
 import path from "path";
 import { Server } from "socket.io";
