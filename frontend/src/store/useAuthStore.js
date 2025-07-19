@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import  axiosInstance  from "../lib/axios.js";
+import { axiosInstance } from "../lib/axios.js";
 import toast from "react-hot-toast";
 import { io } from "socket.io-client";
 
@@ -21,8 +21,7 @@ export const useAuthStore = create((set, get) => ({
       set({ authUser: res.data });
       get().connectSocket();
     } catch (error) {
-      const message = error?.response?.data?.message || "Something went wrong";
-toast.error(message);
+      console.log("Error in checkAuth:", error);
       set({ authUser: null });
     } finally {
       set({ isCheckingAuth: false });
@@ -37,8 +36,7 @@ toast.error(message);
       toast.success("Account created successfully");
       get().connectSocket();
     } catch (error) {
-      const message = error?.response?.data?.message || "Something went wrong";
-toast.error(message);
+      toast.error(error.response.data.message);
     } finally {
       set({ isSigningUp: false });
     }
@@ -53,8 +51,7 @@ toast.error(message);
 
       get().connectSocket();
     } catch (error) {
-      const message = error?.response?.data?.message || "Something went wrong";
-toast.error(message);
+      toast.error(error.response.data.message);
     } finally {
       set({ isLoggingIn: false });
     }
@@ -67,8 +64,7 @@ toast.error(message);
       toast.success("Logged out successfully");
       get().disconnectSocket();
     } catch (error) {
-      const message = error?.response?.data?.message || "Something went wrong";
-toast.error(message);
+      toast.error(error.response.data.message);
     }
   },
 
@@ -79,8 +75,8 @@ toast.error(message);
       set({ authUser: res.data });
       toast.success("Profile updated successfully");
     } catch (error) {
-      const message = error?.response?.data?.message || "Something went wrong";
-toast.error(message);
+      console.log("error in update profile:", error);
+      toast.error(error.response.data.message);
     } finally {
       set({ isUpdatingProfile: false });
     }
